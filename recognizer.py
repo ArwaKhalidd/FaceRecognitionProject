@@ -4,14 +4,10 @@ import numpy as np
 import os
 import pickle
 
-# --------------------------------
-# PROJECT PATH
-# --------------------------------
+
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 
-# --------------------------------
-# LOAD MODELS
-# --------------------------------
+
 print("Loading models...")
 
 hog_face_detector = dlib.get_frontal_face_detector()
@@ -26,9 +22,7 @@ face_rec_model = dlib.face_recognition_model_v1(
 
 print("Models loaded successfully")
 
-# --------------------------------
-# LOAD VECTORS
-# --------------------------------
+
 with open(os.path.join(BASE_PATH, "face_vectors.pkl"), "rb") as f:
     data = pickle.load(f)
 
@@ -37,9 +31,7 @@ known_names = data["names"]
 
 print(f"{len(known_names)} faces loaded")
 
-# --------------------------------
-# FACE ENCODING
-# --------------------------------
+
 def get_face_encoding(image, face):
 
     rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -50,9 +42,7 @@ def get_face_encoding(image, face):
 
     return np.array(encoding)
 
-# --------------------------------
-# RECOGNITION
-# --------------------------------
+
 def recognize_faces(frame):
 
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
