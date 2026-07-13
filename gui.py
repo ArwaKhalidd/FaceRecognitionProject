@@ -5,24 +5,18 @@ from PIL import Image
 
 from recognizer import recognize_faces
 
-# -----------------------------
-# INIT
-# -----------------------------
+
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
 
-# -----------------------------
-# WINDOW
-# -----------------------------
+
 root = ctk.CTk()
 
 root.title("Face Recognition System")
 
 root.geometry("1200x750")
 
-# -----------------------------
-# TITLE
-# -----------------------------
+
 title = ctk.CTkLabel(
     root,
     text="AI Face Recognition System",
@@ -31,9 +25,7 @@ title = ctk.CTkLabel(
 
 title.pack(pady=15)
 
-# -----------------------------
-# VIDEO FRAME
-# -----------------------------
+
 video_frame = ctk.CTkFrame(
     root,
     width=1000,
@@ -52,15 +44,11 @@ video_label = ctk.CTkLabel(
 
 video_label.pack(expand=True)
 
-# -----------------------------
-# GLOBALS
-# -----------------------------
+
 cap = None
 running = False
 
-# -----------------------------
-# STOP CURRENT MODE
-# -----------------------------
+
 def stop_current_mode():
 
     global cap, running
@@ -77,9 +65,7 @@ def stop_current_mode():
 
     video_label.image = None
 
-# -----------------------------
-# PROCESS + SHOW
-# -----------------------------
+
 def process_and_show(frame):
 
     frame = recognize_faces(frame)
@@ -113,9 +99,7 @@ def process_and_show(frame):
 
     video_label.image = ctk_img
 
-# -----------------------------
-# LOOP
-# -----------------------------
+
 def show_frame():
 
     global cap, running
@@ -135,9 +119,7 @@ def show_frame():
 
         root.after(10, show_frame)
 
-# -----------------------------
-# IMAGE MODE
-# -----------------------------
+
 def open_image():
 
     stop_current_mode()
@@ -161,9 +143,7 @@ def open_image():
 
     process_and_show(frame)
 
-# -----------------------------
-# VIDEO MODE
-# -----------------------------
+
 def open_video():
 
     global cap, running
@@ -191,9 +171,7 @@ def open_video():
 
     show_frame()
 
-# -----------------------------
-# WEBCAM MODE
-# -----------------------------
+
 def open_webcam():
 
     global cap, running
@@ -212,9 +190,7 @@ def open_webcam():
 
     show_frame()
 
-# -----------------------------
-# BUTTONS
-# -----------------------------
+
 btn_frame = ctk.CTkFrame(
     root,
     fg_color="transparent"
@@ -251,7 +227,5 @@ ctk.CTkButton(
     fg_color="red"
 ).grid(row=0, column=3, padx=10)
 
-# -----------------------------
-# RUN
-# -----------------------------
+
 root.mainloop()
